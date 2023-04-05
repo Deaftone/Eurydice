@@ -1,4 +1,4 @@
-package net.deaftone.eurydice
+package net.deaftone.eurydice.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
