@@ -12,6 +12,7 @@ android {
 
     defaultConfig {
         applicationId "net.deaftone.eurydice"
+        minSdk 26
         compileSdkVersion 33
         targetSdk 33
         versionCode 1
