@@ -8,7 +8,7 @@ import androidx.room.Query
 import net.deaftone.eurydice.data.entities.Artist
 
 @Dao
-abstract interface ArtistDao {
+interface ArtistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(repos: List<Artist>)
 
