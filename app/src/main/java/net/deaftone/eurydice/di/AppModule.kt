@@ -11,6 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import net.deaftone.eurydice.App
 import net.deaftone.eurydice.data.AppDatabase
 import net.deaftone.eurydice.data.entities.Album
+import net.deaftone.eurydice.data.service.AlbumService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -22,7 +23,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(gson: Gson) : Retrofit {
-        return Retrofit.Builder().baseUrl("http://localhost:3000")
+        return Retrofit.Builder().baseUrl("http://192.168.1.26:3030")
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
     }
 
@@ -34,7 +35,7 @@ class AppModule {
     fun provideDatabase(@ApplicationContext appContext: Context) = AppDatabase.getDatabase(appContext)
 
     @Provides
-    fun provideAlbumService(retrofit: Retrofit): Album = retrofit.create(Album::class.java)
+    fun provideAlbumService(retrofit: Retrofit): AlbumService = retrofit.create(AlbumService::class.java)
 
     @Provides
     @Singleton
