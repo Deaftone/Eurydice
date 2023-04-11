@@ -7,7 +7,7 @@
 
 [![platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://github.com/Deaftone/Eurydice)
 [![license](https://img.shields.io/github/license/Deaftone/Eurydice)](https://github.com/Deaftone/Eurydice/blob/master/LICENSE)
-[![CI](https://github.com/Deaftone/Eurydice/actions/workflows/ci.yml/badge.svg)](https://github.com/Deaftone/Eurydice/actions/workflows/build.yml)
+[![CI](https://github.com/Deaftone/Eurydice/actions/workflows/build.yaml/badge.svg)](https://github.com/Deaftone/Eurydice/actions/workflows/build.yaml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Deaftone/Eurydice)
 ![Lines of Code](https://aschey.tech/tokei/github/Deaftone/Eurydice)
 [![Version](https://img.shields.io/github/v/release/Deaftone/Eurydice)](https://github.com/Deaftone/Eurydice/releases/latest)
