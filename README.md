@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/13013625/212359431-231687c0-4aae-4712-aae5-49c5fc6c6bbf.png" alt="Deaftione logo" title="eurydice" align="center" height="340" width="340" />
+  <img src="https://raw.githubusercontent.com/Deaftone/Eurydice/master/resources/logo2.png" alt="Deaftione logo" title="eurydice" align="center" height="340" width="340" />
 </p>
 
 <h1 align="center">Eurydice</h1>
