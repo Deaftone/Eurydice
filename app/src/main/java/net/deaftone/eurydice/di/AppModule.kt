@@ -1,8 +1,8 @@
 package net.deaftone.eurydice.di
 
 import android.content.Context
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,32 +12,63 @@ import net.deaftone.eurydice.App
 import net.deaftone.eurydice.data.AppDatabase
 import net.deaftone.eurydice.data.entities.Album
 import net.deaftone.eurydice.data.service.AlbumService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+    @Provides
+    @Singleton
+    fun provideHttpInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson) : Retrofit {
+    fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+        OkHttpClient
+            .Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideKotlinJsonAdapterFactory(): KotlinJsonAdapterFactory = KotlinJsonAdapterFactory()
+
+    @Provides
+    @Singleton
+    fun provideMoshi(kotlinJsonAdapterFactory: KotlinJsonAdapterFactory): Moshi = Moshi.Builder()
+        .add(kotlinJsonAdapterFactory)
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory =
+        MoshiConverterFactory.create(moshi)
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        moshiConverterFactory: MoshiConverterFactory, okHttp: OkHttpClient,
+    ): Retrofit {
         return Retrofit.Builder().baseUrl("http://192.168.1.26:3030")
-            .addConverterFactory(GsonConverterFactory.create(gson)).build()
+            .client(okHttp)
+            .addConverterFactory(moshiConverterFactory).build()
     }
 
-    @Provides
-    fun provideGson() : Gson = GsonBuilder().create()
-
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext appContext: Context) = AppDatabase.getDatabase(appContext)
+    fun provideDatabase(@ApplicationContext appContext: Context) =
+        AppDatabase.getDatabase(appContext)
 
     @Provides
-    fun provideAlbumService(retrofit: Retrofit): AlbumService = retrofit.create(AlbumService::class.java)
+    fun provideAlbumService(retrofit: Retrofit): AlbumService =
+        retrofit.create(AlbumService::class.java)
 
-    @Provides
+/*    @Provides
     @Singleton
-    fun provideAlbumDao(database: AppDatabase) = database.albumDao()
+    fun provideAlbumDao(database: AppDatabase) = database.albumDao()*/
 }

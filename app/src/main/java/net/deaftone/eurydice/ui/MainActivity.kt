@@ -27,6 +27,7 @@ import net.deaftone.eurydice.R
 import net.deaftone.eurydice.ui.navigation.BottomBar
 import net.deaftone.eurydice.ui.navigation.BottomBarScreen
 import net.deaftone.eurydice.ui.navigation.MainScreenNavGraph
+import net.deaftone.eurydice.ui.navigation.MainScreenRoutes
 import net.deaftone.eurydice.ui.widget.TopAppBar
 import net.deaftone.eurydice.ui.theme.EurydiceTheme
 @OptIn(ExperimentalAnimationApi::class)
@@ -64,15 +65,13 @@ fun MainActivityPreview() {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 fun NavScreen(navController: NavHostController = rememberAnimatedNavController()) {
-    val screens = listOf(
-        BottomBarScreen.Albums,
-        BottomBarScreen.Artists
+    val hidden = listOf(
+        MainScreenRoutes.AlbumInfo
     )
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    val topBarDestination = screens.any { it.route == currentDestination?.route }
+    val topBarDestination = hidden.any { it.route != currentDestination?.route }
 
     Scaffold(topBar = {
         AnimatedVisibility(

@@ -21,13 +21,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        BottomBarScreen.Albums,
-        BottomBarScreen.Artists
+        BottomBarScreen.AlbumList,
+        BottomBarScreen.Artists,
+    )
+
+    val hidden = listOf(
+        MainScreenRoutes.AlbumInfo
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    val bottomBarDestination = screens.any { it.route == currentDestination?.route }
+    val bottomBarDestination = hidden.any { it.route != currentDestination?.route }
     AnimatedVisibility(
         visible = bottomBarDestination,
         enter = slideInVertically { it },

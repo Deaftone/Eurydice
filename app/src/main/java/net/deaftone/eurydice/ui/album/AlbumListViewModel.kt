@@ -27,8 +27,9 @@ class AlbumViewModel @Inject constructor(private val albumService: AlbumService)
         _albumList.value = AlbumUiState.Loading
         viewModelScope.launch {
             try {
-                _albumList.value = AlbumUiState.Loaded(albumService.getAllAlbums().body()!!)
+                _albumList.value = AlbumUiState.Loaded(albumService.getAllAlbums().body()!!.albums)
             } catch (ex: Exception) {
+                println(ex)
                 _albumList.value = AlbumUiState.Error("Failed to load albums")
             }
         }
