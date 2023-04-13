@@ -10,12 +10,12 @@ import net.deaftone.eurydice.data.room.AlbumDao
 import net.deaftone.eurydice.data.room.ArtistDao
 
 @Database(
-entities = [Album::class, Artist::class],
+entities = [Artist::class],
 version = 1
 )
 
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun albumDao(): AlbumDao
+   // abstract fun albumDao(): AlbumDao
     abstract fun artistDao(): ArtistDao
 
     companion object {
