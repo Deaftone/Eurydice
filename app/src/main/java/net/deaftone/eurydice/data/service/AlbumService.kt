@@ -1,6 +1,5 @@
 package net.deaftone.eurydice.data.service
 
-import net.deaftone.eurydice.data.entities.Album
 import net.deaftone.eurydice.data.models.AlbumListResponse
 import net.deaftone.eurydice.data.models.AlbumResponse
 import retrofit2.Response

@@ -4,13 +4,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import net.deaftone.eurydice.data.entities.Album
 import net.deaftone.eurydice.data.service.AlbumService
 import net.deaftone.eurydice.ui.navigation.MainScreenRoutes
-import javax.inject.Inject
 
 @HiltViewModel
 class AlbumInfoViewModel @Inject constructor(
@@ -32,7 +32,6 @@ class AlbumInfoViewModel @Inject constructor(
         _album.value = AlbumInfoUiState.Loading
         viewModelScope.launch {
             _album.value = AlbumInfoUiState.Loaded(albumService.getAlbum(id).body()!!.album)
-
         }
     }
 }

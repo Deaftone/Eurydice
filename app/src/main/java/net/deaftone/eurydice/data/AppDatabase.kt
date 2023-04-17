@@ -4,18 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import net.deaftone.eurydice.data.entities.Album
 import net.deaftone.eurydice.data.entities.Artist
-import net.deaftone.eurydice.data.room.AlbumDao
 import net.deaftone.eurydice.data.room.ArtistDao
 
 @Database(
-entities = [Artist::class],
-version = 1
+    entities = [Artist::class],
+    version = 1
 )
 
 abstract class AppDatabase : RoomDatabase() {
-   // abstract fun albumDao(): AlbumDao
+    // abstract fun albumDao(): AlbumDao
     abstract fun artistDao(): ArtistDao
 
     companion object {

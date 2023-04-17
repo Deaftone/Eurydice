@@ -3,13 +3,13 @@ package net.deaftone.eurydice.ui.album
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import net.deaftone.eurydice.data.entities.Album
 import net.deaftone.eurydice.data.service.AlbumService
-import javax.inject.Inject
 
 @HiltViewModel
 class AlbumViewModel @Inject constructor(private val albumService: AlbumService) : ViewModel() {
