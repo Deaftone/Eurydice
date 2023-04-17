@@ -86,7 +86,6 @@ object Deps {
             const val runtime = "androidx.room:room-runtime:$version"
             const val ktx = "androidx.room:room-ktx:$version"
             const val paging = "androidx.room:room-paging:$version"
-            const val testing = "androidx.room:room-testing:$version"
         }
 
         object Paging {
@@ -127,7 +126,12 @@ object Deps {
         const val retrofit = "com.squareup.retrofit2:retrofit:$version"
         const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:2.4.0"
     }
+    object Landscapist {
+        private const val version = "2.1.10"
+        const val landscapistGlide = "com.github.skydoves:landscapist-glide:$version"
+        const val landscapistPlaceholder = "com.github.skydoves:landscapist-placeholder:$version"
 
+    }
     object Moshi {
         private const val version = "1.9.3"
         const val moshi = "com.squareup.moshi:moshi:$version"
