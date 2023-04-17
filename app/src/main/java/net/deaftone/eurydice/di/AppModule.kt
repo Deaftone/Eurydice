@@ -8,15 +8,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import net.deaftone.eurydice.App
+import javax.inject.Singleton
 import net.deaftone.eurydice.data.AppDatabase
-import net.deaftone.eurydice.data.entities.Album
 import net.deaftone.eurydice.data.service.AlbumService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -52,9 +50,10 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        moshiConverterFactory: MoshiConverterFactory, okHttp: OkHttpClient,
+        moshiConverterFactory: MoshiConverterFactory,
+        okHttp: OkHttpClient,
     ): Retrofit {
-        return Retrofit.Builder().baseUrl("http://192.168.1.26:3030")
+        return Retrofit.Builder().baseUrl("http://192.168.1.2:3030")
             .client(okHttp)
             .addConverterFactory(moshiConverterFactory).build()
     }
