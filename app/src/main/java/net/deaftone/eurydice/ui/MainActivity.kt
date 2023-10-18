@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.deaftone.eurydice.R
 import net.deaftone.eurydice.ui.navigation.BottomBar
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavScreen(navController = rememberAnimatedNavController())
+                    NavScreen(navController = rememberNavController())
                 }
             }
         }
@@ -66,7 +66,7 @@ fun MainActivityPreview() {
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
-fun NavScreen(navController: NavHostController = rememberAnimatedNavController()) {
+fun NavScreen(navController: NavHostController = rememberNavController()) {
     val hidden = listOf(
         MainScreenRoutes.AlbumInfo
     )

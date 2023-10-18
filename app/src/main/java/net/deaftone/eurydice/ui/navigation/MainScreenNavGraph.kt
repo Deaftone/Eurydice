@@ -1,12 +1,13 @@
 package net.deaftone.eurydice.ui.navigation
 
 import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import net.deaftone.eurydice.ui.TestScreen1
 import net.deaftone.eurydice.ui.album.AlbumInfoScreen
 import net.deaftone.eurydice.ui.album.AlbumListScreen
@@ -17,18 +18,18 @@ fun MainScreenNavGraph(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    AnimatedNavHost(
+    NavHost(
         modifier = modifier,
         navController = navController,
         route = NavGraph.BOTTOM_BAR_GRAPH,
         startDestination = BottomBarScreen.AlbumList.route,
-        enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Right) },
-        exitTransition = { slideOutOfContainer(towards = AnimatedContentScope.SlideDirection.Left) },
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right) },
+        exitTransition = { slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left) },
         popEnterTransition = {
-            slideIntoContainer(towards = AnimatedContentScope.SlideDirection.Right)
+            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
         },
         popExitTransition = {
-            slideOutOfContainer(towards = AnimatedContentScope.SlideDirection.Left)
+            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
         }
 
     ) {

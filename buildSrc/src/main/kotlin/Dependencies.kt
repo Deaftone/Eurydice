@@ -1,5 +1,6 @@
-package net.deaftone.buildSrc
-object Deps {
+import org.gradle.api.artifacts.dsl.DependencyHandler
+
+/*object Deps {
     object Gradle {
         const val dexCount = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:2.0.0"
         const val playPublisher = "com.github.triplet.gradle:play-publisher:3.7.0"
@@ -29,6 +30,7 @@ object Deps {
 
         const val activityVersion = "1.7.0"
         const val activityKtx = "androidx.activity:activity-ktx:$activityVersion"
+        const val activityCompose = "androidx.activity:activity-compose:$activityVersion"
 
         private const val navigationVersion = "2.5.3"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -46,7 +48,7 @@ object Deps {
             const val uiTooling = "androidx.compose.ui:ui-tooling:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val material = "androidx.compose.material:material:$version"
-            const val material3 = "androidx.compose.material3:material3:1.1.0-beta02"
+            const val material3 = "androidx.compose.material3:material3:1.2.0-alpha02"
             const val materialIcons = "androidx.compose.material:material-icons-core:$version"
             const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
@@ -137,17 +139,6 @@ object Deps {
         const val moshi = "com.squareup.moshi:moshi:$version"
         const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:$version"
     }
-    object Dagger {
-        private const val version = "2.44"
-
-        const val dagger = "com.google.dagger:dagger:$version"
-        const val compiler = "com.google.dagger:dagger-compiler:$version"
-
-        const val hilt = "com.google.dagger:hilt-android:$version"
-        const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
-        const val hiltGradle = "com.google.dagger:hilt-android-gradle-plugin:$version"
-        const val hiltTesting = "com.google.dagger:hilt-android-testing:$version"
-    }
 
     object Testing {
         const val junit = "junit:junit:4.13.2"
@@ -158,4 +149,109 @@ object Deps {
         const val mockk = "io.mockk:mockk:1.12.8"
         const val turbine = "app.cash.turbine:turbine:0.8.0"
     }
+
+}
+*/
+
+
+object Dependencies {
+    const val activityKtx = "androidx.activity:activity-ktx:$${Versions.activityVersion}"
+    const val activityCompose = "androidx.activity:activity-compose:${Versions.activityVersion}"
+
+    const val composeMaterial = "androidx.compose.material3:material3:${Versions.composeMaterial3}"
+    const val composeUi = "androidx.compose.ui:ui:${Versions.compose}"
+    const val composeUiGraphics = "androidx.compose.ui:ui-graphics:${Versions.compose}"
+    const val composeUiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+    const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
+    const val composeRuntime = "androidx.compose.runtime:runtime:${Versions.compose}"
+
+    const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt}"
+    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+    const val hiltAgp = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
+    const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.hiltCompose}"
+
+    const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+    const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+
+    const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
+    const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val navigationFeatures = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navigation}"
+    const val navigationTesting = "androidx.navigation:navigation-testing:${Versions.navigation}"
+    const val navigationCompose = "androidx.navigation:navigation-compose:${Versions.navigation}"
+    const val accomNavigationMaterial = "com.google.accompanist:accompanist-navigation-material:0.33.2-alpha"
+    const val accomNavigationAnimation = "com.google.accompanist:accompanist-navigation-animation:0.33.2-alpha"
+
+    const val landscapistGlide = "com.github.skydoves:landscapist-glide:${Versions.glide}"
+    const val landscapistPlaceholder = "com.github.skydoves:landscapist-placeholder:${Versions.glide}"
+
+    const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifeCycle}"
+    const val lifeCycleRuntimeCompose = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifeCycle}"
+
+    const val androidAnimation = "androidx.compose.animation:animation:1.5.3"
+    const val javaPoet = "com.squareup:javapoet:1.13.0"
+}
+fun DependencyHandler.room() {
+    implementation(Dependencies.roomRuntime)
+    implementation(Dependencies.roomKtx)
+    kapt(Dependencies.roomCompiler)
+}
+
+fun DependencyHandler.retrofit() {
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.moshiConverter)
+    implementation(Dependencies.okHttp)
+    implementation(Dependencies.okHttpLoggingInterceptor)
+}
+
+fun DependencyHandler.compose() {
+    implementation(Dependencies.composeUi)
+    implementation(Dependencies.composeRuntime)
+    implementation(Dependencies.composeUiGraphics)
+    implementation(Dependencies.composeUiTooling)
+    implementation(Dependencies.composeMaterial)
+    implementation(Dependencies.hiltNavigation)
+    debugImplementation(Dependencies.composeUiToolingPreview)
+}
+
+fun DependencyHandler.navigation() {
+    implementation(Dependencies.navigationFragment)
+    implementation(Dependencies.navigationUI)
+    implementation(Dependencies.navigationFeatures)
+    implementation(Dependencies.navigationCompose)
+    implementation(Dependencies.androidAnimation)
+}
+
+fun DependencyHandler.moshi() {
+    implementation(Dependencies.moshi)
+    implementation(Dependencies.moshiConverter)
+    implementation(Dependencies.moshiKotlin)
+}
+fun DependencyHandler.activity() {
+    implementation(Dependencies.activityCompose)
+    implementation(Dependencies.activityKtx)
+}
+
+fun DependencyHandler.glide() {
+    implementation(Dependencies.landscapistGlide)
+    implementation(Dependencies.landscapistPlaceholder)
+}
+
+fun DependencyHandler.lifecycle(){
+    implementation(Dependencies.lifeCycleRuntime)
+    implementation(Dependencies.lifeCycleRuntimeCompose)
+}
+
+fun DependencyHandler.hilt() {
+    implementation(Dependencies.hiltAndroid)
+    kapt(Dependencies.hiltCompiler)
 }
