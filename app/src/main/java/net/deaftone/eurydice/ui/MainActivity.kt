@@ -27,8 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import net.deaftone.eurydice.R
 import net.deaftone.eurydice.ui.navigation.BottomBar
 import net.deaftone.eurydice.ui.navigation.MainScreenNavGraph
-import net.deaftone.eurydice.ui.navigation.MainScreenRoutes
-import net.deaftone.eurydice.ui.theme.EurydiceTheme
+import net.deaftone.core.MainScreenRoutes
+import net.deaftone.eurydice.theme.EurydiceTheme
 import net.deaftone.eurydice.ui.widget.TopAppBar
 
 

@@ -15,3 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Eurydice"
 include(":app")
+include(":feature:album:data")
+include(":feature:album:ui")
+include(":core")
+include(":feature:artist:data")

@@ -9,8 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import net.deaftone.eurydice.data.AppDatabase
-import net.deaftone.eurydice.data.service.AlbumService
+import net.deaftone.core.database.AppDatabase
+import net.deaftone.album.data.service.AlbumService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
