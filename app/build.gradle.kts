@@ -48,9 +48,8 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":feature:album:data")))
     implementation(project(mapOf("path" to ":feature:album:ui")))
-    implementation(project(mapOf("path" to ":core")))
+    implementation(project(mapOf("path" to ":core:data")))
     retrofit()
     room()
     hilt()

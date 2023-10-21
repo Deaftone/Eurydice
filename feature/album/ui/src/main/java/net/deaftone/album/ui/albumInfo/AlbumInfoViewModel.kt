@@ -8,9 +8,9 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import net.deaftone.album.data.model.Album
-import net.deaftone.album.data.service.AlbumService
-import net.deaftone.core.MainScreenRoutes
+import net.deaftone.data.MainScreenRoutes
+import net.deaftone.data.service.album.AlbumService
+import net.deaftone.data.model.album.Album
 
 @HiltViewModel
 class AlbumInfoViewModel @Inject constructor(

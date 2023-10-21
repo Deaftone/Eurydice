@@ -17,16 +17,18 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import net.deaftone.data.BottomBarScreen
+import net.deaftone.data.MainScreenRoutes
 
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        net.deaftone.core.BottomBarScreen.AlbumList,
-        net.deaftone.core.BottomBarScreen.Artists,
+        BottomBarScreen.AlbumList,
+        BottomBarScreen.Artists,
     )
 
     val hidden = listOf(
-        net.deaftone.core.MainScreenRoutes.AlbumInfo
+        MainScreenRoutes.AlbumInfo
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -51,7 +53,7 @@ fun BottomBar(navController: NavHostController) {
 
 @Composable
 fun RowScope.AddItem(
-    screen: net.deaftone.core.BottomBarScreen,
+    screen: BottomBarScreen,
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {

@@ -9,7 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import net.deaftone.album.ui.albumInfo.AlbumInfoScreen
 import net.deaftone.album.ui.albumList.AlbumListScreen
-import net.deaftone.core.BottomBarScreen
+import net.deaftone.data.BottomBarScreen
+import net.deaftone.data.MainScreenRoutes
+import net.deaftone.data.NavGraph
 import net.deaftone.eurydice.ui.TestScreen1
 
 
@@ -22,8 +24,8 @@ fun MainScreenNavGraph(
     NavHost(
         modifier = modifier,
         navController = navController,
-        route = net.deaftone.core.NavGraph.BOTTOM_BAR_GRAPH,
-        startDestination = net.deaftone.core.BottomBarScreen.AlbumList.route,
+        route = NavGraph.BOTTOM_BAR_GRAPH,
+        startDestination = BottomBarScreen.AlbumList.route,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right) },
         exitTransition = { slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left) },
         popEnterTransition = {
@@ -34,12 +36,12 @@ fun MainScreenNavGraph(
         }
 
     ) {
-        composable(route = net.deaftone.core.BottomBarScreen.Artists.route) {
+        composable(route = BottomBarScreen.Artists.route) {
             TestScreen1(onItemClick = {
-                navController.navigate(net.deaftone.core.BottomBarScreen.Artists.route)
+                navController.navigate(BottomBarScreen.Artists.route)
             }, name = "test")
         }
-        composable(route = net.deaftone.core.BottomBarScreen.AlbumList.route) {
+        composable(route = BottomBarScreen.AlbumList.route) {
             AlbumListScreen(onItemClick = {
                 navController.navigate(BottomBarScreen.AlbumList.route)
             }, onNavigationUp = {
@@ -49,7 +51,7 @@ fun MainScreenNavGraph(
             )
         }
 
-        composable(route = net.deaftone.core.MainScreenRoutes.AlbumInfo.route) { navBackStackEntry ->
+        composable(route = MainScreenRoutes.AlbumInfo.route) { navBackStackEntry ->
             AlbumInfoScreen(onNavigationUp = {
                 navController.popBackStack()
             })

@@ -1,15 +1,12 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
-    id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
 android {
-    namespace = "net.deaftone.album.ui"
+    namespace = "net.deaftone.data"
     compileSdk = 34
-
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -32,23 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = "18"
     }
-
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
-    }
-
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":core:data")))
-    hilt()
-    compose()
-    activity()
-    navigation()
-    glide()
+    room()
+    moshi()
     lifecycle()
-    retrofit()
+    activity()
 }

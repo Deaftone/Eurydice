@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import net.deaftone.album.data.model.Album
-import net.deaftone.album.data.service.AlbumService
+import net.deaftone.data.service.album.AlbumService
+import net.deaftone.data.model.album.Album
 
 @HiltViewModel
 class AlbumViewModel @Inject constructor(private val albumService: AlbumService) : ViewModel() {

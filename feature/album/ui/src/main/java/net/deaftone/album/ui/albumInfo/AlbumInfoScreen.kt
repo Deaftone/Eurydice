@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.skydoves.landscapist.glide.GlideImage
-import net.deaftone.album.data.model.Album
+import net.deaftone.data.model.album.Album
 
 @Composable
 fun AlbumInfoScreen(

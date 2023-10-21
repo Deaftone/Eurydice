@@ -31,8 +31,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.skydoves.landscapist.glide.GlideImage
-import net.deaftone.album.data.model.Album
-import net.deaftone.core.MainScreenRoutes
+import net.deaftone.data.MainScreenRoutes
+import net.deaftone.data.model.album.Album
 
 @Composable
 fun AlbumListScreen(
