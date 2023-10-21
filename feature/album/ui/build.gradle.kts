@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":core:data")))
+    implementation(project(":core:data"))
     hilt()
     compose()
     activity()
