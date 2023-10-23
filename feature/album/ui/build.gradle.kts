@@ -45,6 +45,7 @@ android {
 dependencies {
     implementation(project(":core:data"))
     hilt()
+    voyager()
     compose()
     activity()
     navigation()

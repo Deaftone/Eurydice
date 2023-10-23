@@ -53,6 +53,7 @@ dependencies {
     retrofit()
     room()
     hilt()
+    voyager()
     compose()
     moshi()
     activity()

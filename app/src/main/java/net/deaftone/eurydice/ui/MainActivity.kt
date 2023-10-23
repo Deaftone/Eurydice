@@ -8,6 +8,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,7 +24,11 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import cafe.adriel.voyager.navigator.tab.Tab
 import dagger.hilt.android.AndroidEntryPoint
+import net.deaftone.album.ui.albumList.AlbumListScreen
 import net.deaftone.data.MainScreenRoutes
 import net.deaftone.eurydice.R
 import net.deaftone.eurydice.ui.navigation.BottomBar
@@ -32,7 +37,6 @@ import net.deaftone.eurydice.theme.EurydiceTheme
 import net.deaftone.eurydice.ui.widget.TopAppBar
 
 
-@OptIn(ExperimentalAnimationApi::class)
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,13 +48,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavScreen(navController = rememberNavController())
+                    Navigator(AlbumListScreen())
                 }
             }
         }
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun MainActivityPreview() {
@@ -63,8 +68,8 @@ fun MainActivityPreview() {
         }
     }
 }
+*/
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 fun NavScreen(navController: NavHostController = rememberNavController()) {
     val hidden = listOf(
@@ -76,17 +81,45 @@ fun NavScreen(navController: NavHostController = rememberNavController()) {
     val topBarDestination = hidden.any { it.route != currentDestination?.route }
 
     Scaffold(topBar = {
-        AnimatedVisibility(
-            visible = topBarDestination,
-            enter = slideInVertically(animationSpec = spring(visibilityThreshold = IntOffset.Zero)),
-            exit = slideOutVertically(animationSpec = spring(visibilityThreshold = IntOffset.Zero))
-        ) {
             TopAppBar(stringResource(id = R.string.app_name))
-        }
     }, bottomBar = { BottomBar(navController = navController) }) { padding ->
         MainScreenNavGraph(
             navController = navController,
             modifier = Modifier.padding(padding)
         )
     }
+}
+
+@Composable
+private fun BottomNavigation() {
+    BottomNavigation(
+    ) {
+        TabNavigationItem(HomeTab)
+        TabNavigationItem(AddTab)
+        TabNavigationItem(ProfileTab)
+    }
+}
+@Composable
+private fun RowScope.TabNavigationItem(
+    tab: Tab,
+) {
+    val tabNavigator = LocalTabNavigator.current
+    BottomNavigationItem(
+        selected = tabNavigator.current.key == tab.key,
+        onClick = { tabNavigator.current = tab },
+        icon = {
+            Icon(
+                painter = tab.options.icon!!,
+                contentDescription = tab.options.title
+            )
+        },
+        label = {
+            Text(
+                text = tab.options.title,
+                style = AppTextStyle.menuLabel
+            )
+        },
+        selectedContentColor = MaterialTheme.colors.primary,
+        unselectedContentColor = MaterialTheme.colors.secondary
+    )
 }

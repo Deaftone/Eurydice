@@ -30,42 +30,45 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.hilt.getViewModel
 import com.skydoves.landscapist.glide.GlideImage
+import net.deaftone.album.ui.albumInfo.AlbumInfoViewModel
 import net.deaftone.data.MainScreenRoutes
 import net.deaftone.data.model.album.Album
 
-@Composable
-fun AlbumListScreen(
-    navController: NavHostController = rememberNavController(),
-    viewModel: AlbumViewModel = hiltViewModel(),
-    onNavigationUp: () -> Unit,
-    onItemClick: () -> Unit
-) {
-    when (val state = viewModel.albumList.collectAsState().value) {
+class AlbumListScreen: Screen {
+    @Composable
+    override fun Content() {
+        val screenModel = getViewModel<AlbumViewModel>()
 
-        is AlbumUiState.Empty -> Text(
-            text = "No data",
-            modifier = Modifier.padding(16.dp)
-        )
-        is AlbumUiState.Loading ->
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator()
-            }
-        is AlbumUiState.Error -> Text(text = state.message)
-        is AlbumUiState.Loaded -> LazyColumn(modifier = Modifier.fillMaxHeight()) {
-            items(state.data) { album ->
-                AlbumItem(
-                    album = album,
-                    Modifier.clickable(
-                        onClick = {
-                            navController.navigate(MainScreenRoutes.AlbumInfo.withId(album.id))
-                        }
+        when (val state = screenModel.albumList.collectAsState().value) {
+
+            is AlbumUiState.Empty -> Text(
+                text = "No data",
+                modifier = Modifier.padding(16.dp)
+            )
+            is AlbumUiState.Loading ->
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
+                }
+            is AlbumUiState.Error -> Text(text = state.message)
+            is AlbumUiState.Loaded -> LazyColumn(modifier = Modifier.fillMaxHeight()) {
+                items(state.data) { album ->
+                    AlbumItem(
+                        album = album,
+       /*                 Modifier.clickable(
+                            onClick = {
+                                navController.navigate(MainScreenRoutes.AlbumInfo.withId(album.id))
+                            }
+                        )*/
                     )
-                )
+                }
             }
         }
     }

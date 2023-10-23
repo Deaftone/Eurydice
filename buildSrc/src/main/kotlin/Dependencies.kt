@@ -198,7 +198,24 @@ object Dependencies {
     const val lifeCycleRuntimeCompose = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifeCycle}"
 
     const val androidAnimation = "androidx.compose.animation:animation:1.5.3"
-    const val javaPoet = "com.squareup:javapoet:1.13.0"
+    const val voyagerNavigator = "cafe.adriel.voyager:voyager-navigator:${Versions.voyager}"
+    const val voyagerTransitions = "cafe.adriel.voyager:voyager-transitions:${Versions.voyager}"
+    const val voyagerViewModel = "cafe.adriel.voyager:voyager-androidx:${Versions.voyager}"
+    const val voyagerHilt = "cafe.adriel.voyager:voyager-hilt:${Versions.voyager}"
+    const val voyagerLiveData = "cafe.adriel.voyager:voyager-livedata:${Versions.voyager}"
+    const val voyagerTabNavigator = "cafe.adriel.voyager:voyager-tab-navigator:${Versions.voyager}"
+    const val voyagerBottomSheetNavigator = "cafe.adriel.voyager:voyager-bottom-sheet-navigator:${Versions.voyager}"
+
+}
+
+fun DependencyHandler.voyager() {
+    implementation(Dependencies.voyagerNavigator)
+    implementation(Dependencies.voyagerTransitions)
+    implementation(Dependencies.voyagerViewModel)
+    implementation(Dependencies.voyagerHilt)
+    implementation(Dependencies.voyagerLiveData)
+    implementation(Dependencies.voyagerTabNavigator)
+    implementation(Dependencies.voyagerBottomSheetNavigator)
 }
 fun DependencyHandler.room() {
     implementation(Dependencies.roomRuntime)

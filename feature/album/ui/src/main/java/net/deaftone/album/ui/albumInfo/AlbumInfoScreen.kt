@@ -12,90 +12,98 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.hilt.getScreenModel
+import cafe.adriel.voyager.hilt.getViewModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import com.skydoves.landscapist.glide.GlideImage
 import net.deaftone.data.model.album.Album
+class AlbumInfoScreen : Screen {
 
-@Composable
-fun AlbumInfoScreen(
-    onNavigationUp: () -> Unit,
-    viewModel: AlbumInfoViewModel = hiltViewModel(),
-) {
-    when (val state = viewModel.album.collectAsStateWithLifecycle().value) {
+    private lateinit var navigator: Navigator
 
-        is AlbumInfoUiState.Empty -> Text(
-            text = "No data",
-            modifier = Modifier.padding(16.dp)
-        )
-        is AlbumInfoUiState.Loading ->
+    @Composable
+    override fun Content() {
+        val viewModel = getViewModel<AlbumInfoViewModel>()
+        when (val state = viewModel.album.collectAsStateWithLifecycle().value) {
 
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator()
-            }
-        is AlbumInfoUiState.Error -> Text(text = state.message)
-        is AlbumInfoUiState.Loaded ->
-            AlbumColumn(album = state.data)
-           /* Column(
-                modifier = Modifier
-                    .padding(bottom = 64.dp)
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            is AlbumInfoUiState.Empty -> Text(
+                text = "No data",
+                modifier = Modifier.padding(16.dp)
+            )
+
+            is AlbumInfoUiState.Loading ->
+
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                        .height(280.dp)
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    GlideImage(
-                        imageModel = { "http://192.168.1.2:3030/albums/${state.data.id}/cover" },
-                        // shows an error text message when request failed.
-                        failure = {
-                            Text(text = "image request failed.")
-                        },
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxHeight()
-                            .aspectRatio(1f)
-                            .clip(MaterialTheme.shapes.medium)
-                    )
+                    CircularProgressIndicator()
                 }
 
-                LazyColumn() {
-                    items(state.data.songs!!) { song ->
-                        Card(
-                            modifier = Modifier
-                                .padding(8.dp)
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(8.dp)
-                                    .height(72.dp)
-                            ) {
-                                Text(
-                                    text = song.title,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    style = MaterialTheme.typography.bodyMedium.copy(
-                                        color = LocalContentColor.current,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                )
-                            }
-                        }
+            is AlbumInfoUiState.Error -> Text(text = state.message)
+            is AlbumInfoUiState.Loaded ->
+                AlbumColumn(album = state.data)
+            /* Column(
+                 modifier = Modifier
+                     .padding(bottom = 64.dp)
+                     .fillMaxSize(),
+                 horizontalAlignment = Alignment.CenterHorizontally
+             ) {
+                 Column(
+                     horizontalAlignment = Alignment.CenterHorizontally,
+                     modifier = Modifier
+                         .fillMaxWidth()
+                         .padding(8.dp)
+                         .height(280.dp)
+                 ) {
+                     GlideImage(
+                         imageModel = { "http://192.168.1.2:3030/albums/${state.data.id}/cover" },
+                         // shows an error text message when request failed.
+                         failure = {
+                             Text(text = "image request failed.")
+                         },
+                         modifier = Modifier
+                             .padding(8.dp)
+                             .fillMaxHeight()
+                             .aspectRatio(1f)
+                             .clip(MaterialTheme.shapes.medium)
+                     )
+                 }
 
-                    }
-                }
+                 LazyColumn() {
+                     items(state.data.songs!!) { song ->
+                         Card(
+                             modifier = Modifier
+                                 .padding(8.dp)
+                         ) {
+                             Row(
+                                 modifier = Modifier
+                                     .fillMaxWidth()
+                                     .padding(8.dp)
+                                     .height(72.dp)
+                             ) {
+                                 Text(
+                                     text = song.title,
+                                     maxLines = 1,
+                                     overflow = TextOverflow.Ellipsis,
+                                     style = MaterialTheme.typography.bodyMedium.copy(
+                                         color = LocalContentColor.current,
+                                         fontWeight = FontWeight.Bold
+                                     )
+                                 )
+                             }
+                         }
 
-            }*/
+                     }
+                 }
+
+             }*/
+        }
     }
 }
-
 @Composable
 fun AlbumColumn(
     album: Album,

@@ -41,7 +41,7 @@ fun MainScreenNavGraph(
                 navController.navigate(BottomBarScreen.Artists.route)
             }, name = "test")
         }
-        composable(route = BottomBarScreen.AlbumList.route) {
+  /*      composable(route = BottomBarScreen.AlbumList.route) {
             AlbumListScreen(onItemClick = {
                 navController.navigate(BottomBarScreen.AlbumList.route)
             }, onNavigationUp = {
@@ -55,7 +55,7 @@ fun MainScreenNavGraph(
             AlbumInfoScreen(onNavigationUp = {
                 navController.popBackStack()
             })
-        }
+        }*/
 
        /* composable(route = MainScreenRoutes.SettingsScreen.route) {
             SettingsScreen(onNavigationUp = {

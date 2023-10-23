@@ -12,4 +12,5 @@ object Versions {
     const val hiltCompose = "1.0.0"
     const val glide = "2.1.10"
     const val lifeCycle = "2.6.1"
+    const val voyager = "1.0.0-rc05"
 }
